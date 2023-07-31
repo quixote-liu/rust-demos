@@ -1,25 +1,17 @@
 use std::vec;
-
 use inventory::ShirtColor;
-
-
 mod front_of_host;
-
 mod demo;
-
 mod vector;
-
 mod file_demo;
-
 mod inventory;
-
 mod iterator;
-
 mod box_demo;
 mod thread_demo;
 mod mutex_demo;
 mod match_demo;
 mod object_demo;
+mod cal;
 
 fn main() {
     // demo::run();
@@ -57,6 +49,8 @@ fn main() {
     // match_demo::run();
     // match_demo::while_let();
     match_demo::for_demo();
+
+    println!("13/2 = {}", 13/2);
 }
 
 
