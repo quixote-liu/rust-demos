@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 encoding = "0.2.33"
+ferris-says = "0.3.1"

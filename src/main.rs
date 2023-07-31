@@ -12,6 +12,7 @@ mod mutex_demo;
 mod match_demo;
 mod object_demo;
 mod cal;
+mod hello;
 
 fn main() {
     // demo::run();
@@ -48,9 +49,11 @@ fn main() {
 
     // match_demo::run();
     // match_demo::while_let();
-    match_demo::for_demo();
+    // match_demo::for_demo();
 
-    println!("13/2 = {}", 13/2);
+    // println!("13/2 = {}", 13/2);
+
+    hello::ferris_says_out();
 }
 
 
