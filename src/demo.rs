@@ -59,3 +59,16 @@ fn value_in_cents(coin: Coin) -> u8 {
         }
     }
 }
+
+pub fn max<T: std::cmp::PartialOrd>(array: &[T]) -> &T {
+    let mut max_index = 0;
+    let mut index = 0;
+    while index < array.len() {
+        if array[max_index] < array[index] {
+            max_index = index;
+        };
+        index += 1;
+    };
+    let res = &array[max_index];
+    return res;
+}

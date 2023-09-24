@@ -7,17 +7,17 @@
 
 struct Solution{}
 
-impl Solution {
-    pub fn relative_sort_array(arr1: Vec<i32>, arr2: Vec<i32>) -> Vec<i32> {
-        let mut start_index = 0;
-        for i in 0..arr2.len() {
-            let cur_sort = arr2[i];
-            for j in start_index..arr1.len() {
-                if arr1[j] == cur_sort {
+// impl Solution {
+//     pub fn relative_sort_array(arr1: Vec<i32>, arr2: Vec<i32>) -> Vec<i32> {
+//         let mut start_index = 0;
+//         for i in 0..arr2.len() {
+//             let cur_sort = arr2[i];
+//             for j in start_index..arr1.len() {
+//                 if arr1[j] == cur_sort {
                     
-                }
-            }    
-        };
+//                 }
+//             }    
+//         };
 
-    }
-}
+//     }
+// }

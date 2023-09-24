@@ -13,6 +13,7 @@ mod match_demo;
 mod object_demo;
 mod cal;
 mod hello;
+mod enum_demo;
 
 fn main() {
     // demo::run();
@@ -46,6 +47,9 @@ fn main() {
     // thread_demo::run_mpsc();
 
     // mutex_demo::run();
+    // let array = [1, 2, 3, 1,2,34,2,123,3323,453];
+    // let res = demo::max(&array);
+    // println!("demo::max = {}", res);
 
     // match_demo::run();
     // match_demo::while_let();
@@ -53,8 +57,17 @@ fn main() {
 
     // println!("13/2 = {}", 13/2);
 
-    hello::ferris_says_out();
+    // hello::ferris_says_out();
+    // hello::demo_test();
+
+
+    // enum_demo::enum_demo();
+    // enum_demo::if_let();
+
+    let case = vec![-3,0,1,-3,1,1,1,-3,10,0];
+    cal::unique_occurrences::Solution::unique_occurrences(case);
     
+
 }
 
 
