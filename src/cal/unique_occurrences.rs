@@ -27,7 +27,6 @@ impl Solution {
             //     times.insert(val, true);
             // }
         }
-        println!("{}", res)
         return res;
     }
 }
