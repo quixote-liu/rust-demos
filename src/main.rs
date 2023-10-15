@@ -64,9 +64,20 @@ fn main() {
     // enum_demo::enum_demo();
     // enum_demo::if_let();
 
-    let case = vec![-3,0,1,-3,1,1,1,-3,10,0];
-    cal::unique_occurrences::Solution::unique_occurrences(case);
+    // let case = vec![-3,0,1,-3,1,1,1,-3,10,0];
+    // cal::unique_occurrences::Solution::unique_occurrences(case);
     
+    // for i in 1..2 {
+    //     println!("hello,world")
+    // }
+    // let str1 = String::from("hello,world");
+    // println!("{}", str1.get(0..1).unwrap());
+    
+    let mut a = vec![2, 0];
+    let m = 1;
+    let mut b = vec![1];
+    let n = 1;
+    cal::merge::Solution::merge(&mut a, m, &mut b, n);
 
 }
 
