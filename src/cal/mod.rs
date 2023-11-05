@@ -13,3 +13,4 @@ mod odd_cells;
 mod defang_i_paddr;
 mod gcd_of_strings;
 pub mod merge;
+mod tribonacci;

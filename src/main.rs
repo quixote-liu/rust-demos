@@ -14,6 +14,7 @@ mod object_demo;
 mod cal;
 mod hello;
 mod enum_demo;
+mod mqtt_demo;
 
 fn main() {
     // demo::run();
@@ -73,12 +74,13 @@ fn main() {
     // let str1 = String::from("hello,world");
     // println!("{}", str1.get(0..1).unwrap());
     
-    let mut a = vec![2, 0];
-    let m = 1;
-    let mut b = vec![1];
-    let n = 1;
-    cal::merge::Solution::merge(&mut a, m, &mut b, n);
+    // let mut a = vec![2, 0];
+    // let m = 1;
+    // let mut b = vec![1];
+    // let n = 1;
+    // cal::merge::Solution::merge(&mut a, m, &mut b, n);
 
+    mqtt_demo::client::demo_run();
 }
 
 
