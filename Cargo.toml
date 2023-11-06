@@ -8,3 +8,5 @@ edition = "2021"
 [dependencies]
 encoding = "0.2.33"
 ferris-says = "0.3.1"
+paho-mqtt = "0.12"
+openssl = { version = "0.10.57", features = ["vendored"] }

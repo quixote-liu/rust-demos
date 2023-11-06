@@ -1,5 +1,3 @@
-// https://leetcode.cn/problems/greatest-common-divisor-of-strings/description/
-
 struct Solution{}
 
 impl Solution {
