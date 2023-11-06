@@ -78,39 +78,6 @@ fn main() {
     // }
     // let str1 = String::from("hello,world");
     // println!("{}", str1.get(0..1).unwrap());
-<<<<<<< HEAD
-
-    let guess = "345".parse::<i32>().expect("Not a Number");
-    println!("guess = {}", guess);
-
-    let mut a = vec![2, 0];
-    let m = 1;
-    let mut b = vec![1];
-    let n = 1;
-    cal::merge::Solution::merge(&mut a, m, &mut b, n);
-
-    let mut val = 10;
-    change_data(&mut val);
-    println!("val =  {}", val);
-
-    // let aa = 10;
-    // let bb = 20;
-    // let cc = add(aa, bb);
-    // println!("cc = {}", cc);
-
-    let p1 = add::Point{x: 1, y:2};
-    let p2 = add::Point{x:3, y:4};
-    let p3 = p1.add(p2);
-    println!("p3 = {:?}", p3);
-
-    display_demo::display_demo_run();
-
-    demo_codes::demo_codes_run();
-}
-
-fn change_data(v: &mut i32) {
-    *v = 100;
-=======
     
     // let mut a = vec![2, 0];
     // let m = 1;
@@ -119,7 +86,6 @@ fn change_data(v: &mut i32) {
     // cal::merge::Solution::merge(&mut a, m, &mut b, n);
 
     mqtt_demo::client::demo_run();
->>>>>>> ad873bee3e257594e3fd8e8b25208ab3fbd30949
 }
 
 fn some_function<T, U>(t: &T, u: &U) -> i32
