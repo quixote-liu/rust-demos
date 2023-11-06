@@ -12,3 +12,4 @@ pub mod unique_occurrences;
 mod defang_i_paddr;
 mod gcd_of_strings;
 pub mod merge;
+mod is_palindrome;

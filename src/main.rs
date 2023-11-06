@@ -1,5 +1,7 @@
-use std::vec;
+use std::{vec, fmt::{Display, Debug}, collections::btree_map::Values, ops::Add};
 use inventory::ShirtColor;
+
+use crate::demo::max;
 mod front_of_host;
 mod demo;
 mod vector;
@@ -14,6 +16,9 @@ mod object_demo;
 mod cal;
 mod hello;
 mod enum_demo;
+mod add;
+mod demo_codes;
+mod display_demo;
 
 fn main() {
     // demo::run();
@@ -72,13 +77,69 @@ fn main() {
     // }
     // let str1 = String::from("hello,world");
     // println!("{}", str1.get(0..1).unwrap());
-    
+
+    let guess = "345".parse::<i32>().expect("Not a Number");
+    println!("guess = {}", guess);
+
     let mut a = vec![2, 0];
     let m = 1;
     let mut b = vec![1];
     let n = 1;
     cal::merge::Solution::merge(&mut a, m, &mut b, n);
 
+    let mut val = 10;
+    change_data(&mut val);
+    println!("val =  {}", val);
+
+    // let aa = 10;
+    // let bb = 20;
+    // let cc = add(aa, bb);
+    // println!("cc = {}", cc);
+
+    let p1 = add::Point{x: 1, y:2};
+    let p2 = add::Point{x:3, y:4};
+    let p3 = p1.add(p2);
+    println!("p3 = {:?}", p3);
+
+    display_demo::display_demo_run();
+
+    demo_codes::demo_codes_run();
 }
 
+fn change_data(v: &mut i32) {
+    *v = 100;
+}
+
+fn some_function<T, U>(t: &T, u: &U) -> i32
+where T: Display+Clone, U: Clone+Debug
+{
+    90
+}
+
+// fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
+//     a + b
+// }
+
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Point<T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+}
+
+
+// 最大值
+fn largest<T: std::cmp::PartialOrd + Copy>(list: &[T]) -> T {
+    let mut max = list[0];
+    for &v in list {
+        if v > max {
+            max = v;
+        }
+    }
+    return max;
+}
 
