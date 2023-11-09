@@ -20,6 +20,7 @@ mod add;
 mod demo_codes;
 mod display_demo;
 mod mqtt_demo;
+mod path_demo;
 
 fn main() {
     // demo::run();
@@ -86,6 +87,8 @@ fn main() {
     // cal::merge::Solution::merge(&mut a, m, &mut b, n);
 
     mqtt_demo::client::demo_run();
+
+    // path_demo::path_demo_run();
 }
 
 fn some_function<T, U>(t: &T, u: &U) -> i32

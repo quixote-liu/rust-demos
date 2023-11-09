@@ -1,4 +1,5 @@
 use chrono::Utc;
+use std::str::FromStr;
 use std::time::Duration;
 use std::process;
 use std::thread::sleep;
@@ -8,8 +9,10 @@ extern crate paho_mqtt as mqtt;
 const BROKER : &str = "tcp://10.10.10.73:1883";
 const CLIENT : &str = "rust_publish111";
 const TOPICS : &[&str] = &["testtopic/demo"];
+const QOS: i32 = 0;
 
 pub fn demo_run() {
+    // demo2()
     demo_auto_run()
 }
 
@@ -22,7 +25,7 @@ fn demo3() {
         .max_buffered_messages(10)
         .delete_oldest_messages(true)
         .finalize();
-    let cli = mqtt::Client::new(create_opts).unwrap();
+    let cli = mqtt::AsyncClient::new(create_opts).unwrap();
 
     let conn_opt = mqtt::ConnectOptionsBuilder::new()
         .keep_alive_interval(Duration::from_secs(20))
@@ -31,16 +34,11 @@ fn demo3() {
         .automatic_reconnect(Duration::from_secs(1), Duration::from_secs(10))
         .finalize();
 
-    if let Err(err) = cli.connect(conn_opt.clone()) {
-        println!("连接北向mqtt broker 失败 error = {:?}", err);
-        process::exit(1);
-    }
+    cli.connect(conn_opt.clone());
 
     let rx = cli.start_consuming();
 
-    if let Err(err) = cli.subscribe(TOPICS[0], 1) {
-        println!("Error subscribes topics {:?}", err);
-    }
+    cli.subscribe_many(TOPICS, &[QOS]);
 
     for msg in rx.iter() {
         if let Some(msg) = msg {
@@ -55,12 +53,9 @@ fn demo3() {
 fn demo2() {
     let create_opts = mqtt::CreateOptionsBuilder::new()
         .server_uri(BROKER.to_string())
-        .client_id(CLIENT.to_string())
         .allow_disconnected_send_at_anytime(true)
-        // .persist_qos0(true)
-        // .persistence(mqtt::PersistenceType::FilePath(PathBuf::from("./message_cache")))
-        .max_buffered_messages(1000)
-        .delete_oldest_messages(true)
+        .client_id("s".to_string())
+        .persistence(mqtt::PersistenceType::File)
         .finalize();
     let cli = mqtt::Client::new(create_opts).unwrap();
 
@@ -80,7 +75,7 @@ fn demo2() {
     let mut is_disconnected = false;
     loop {
         let content = "hello, this is test message".to_string();
-        let msg = mqtt::Message::new(TOPICS[0].to_string(), content, 1);
+        let msg = mqtt::Message::new(TOPICS[0].to_string(), content, QOS);
         if !is_disconnected {
             if let Err(err) = cli.publish(msg) {
                 is_disconnected = true;
@@ -91,7 +86,7 @@ fn demo2() {
         }
         if is_disconnected && !cli.is_connected() {
             let content = "hello, this is cache message".to_string();
-            let msg = mqtt::Message::new(TOPICS[0].to_string(), content, 1);
+            let msg = mqtt::Message::new(TOPICS[0].to_string(), content, QOS);
             if let Err(err) = cli.publish(msg) {
                 is_disconnected = true;
                 println!("推送数据失败: {:?}", err);
@@ -109,63 +104,9 @@ fn demo1() {
     let create_opts = mqtt::CreateOptionsBuilder::new()
         .server_uri(BROKER.to_string())
         .client_id(CLIENT.to_string())
-        .allow_disconnected_send_at_anytime(true)
-        .persistence(mqtt::PersistenceType::File)
-        .max_buffered_messages(1000)
-        .finalize();
-    let cli = mqtt::Client::new(create_opts).unwrap();
-
-    let conn_opt = mqtt::ConnectOptionsBuilder::new()
-        .keep_alive_interval(Duration::from_secs(20))
-        .clean_session(false)
-        .retry_interval(Duration::from_secs(1))
-        .automatic_reconnect(Duration::from_secs(1), Duration::from_secs(10))
-        .finalize();
-
-    if let Err(err) = cli.connect(conn_opt.clone()) {
-        println!("连接北向mqtt broker 失败 error = {:?}", err);
-        process::exit(1);
-    }
-
-    // 发送正常数据
-    for _ in 0..5 {
-        let content = "hello, this is test message".to_string();
-        let msg = mqtt::Message::new(TOPICS[0].to_string(), content, 1);
-        if let Err(err) = cli.publish(msg) {
-            println!("推送数据失败: {:?}", err);
-        } else {
-            println!("推送数据成功");
-        }
-        sleep(Duration::from_secs(1));
-    }
-    // 断开连接
-    let _ = cli.disconnect(None);
-    // 开始发送离线数据
-    for _ in 0..10 {
-        let content = "hello, this is offline message".to_string();
-        let msg = mqtt::Message::new(TOPICS[0].to_string(), content, 1);
-        if let Err(err) = cli.publish(msg) {
-            println!("推送离线数据失败: {:?}", err);
-        } else {
-            println!("推送离线数据成功");
-        }
-        sleep(Duration::from_secs(1));
-    }
-    // 不终止当前线程，进入循环等待
-    let _ = cli.reconnect();
-    loop {
-        println!("等待离线数据发送....., cli.is_connected = {}", cli.is_connected());
-        sleep(Duration::from_secs(1));
-    }
-}
-
-// 一直循环发送消息
-fn demo_auto_run() {
-    let create_opts = mqtt::CreateOptionsBuilder::new()
-        .server_uri(BROKER.to_string())
-        .client_id(CLIENT.to_string())
-        .allow_disconnected_send_at_anytime(true)
-        .max_buffered_messages(10)
+        .send_while_disconnected(true)
+        // .allow_disconnected_send_at_anytime(true)
+        .max_buffered_messages(100)
         .finalize();
     let cli = mqtt::AsyncClient::new(create_opts).unwrap();
 
@@ -178,14 +119,75 @@ fn demo_auto_run() {
 
     let _ = cli.connect(conn_opt.clone()).wait_for(Duration::from_secs(3));
 
+    // 连接时发送5个消息
+    for i in 0..5 {
+        let content = format!("hello, this is first message , index = {}", i);
+        let msg = mqtt::Message::new(TOPICS[0].to_string(), content, QOS);
+        if let Err(err) = cli.publish(msg).wait_for(Duration::from_secs(1)) {
+            println!("推送数据失败: {:?}, index = {}", err, i);
+        } else {
+            println!("推送数据成功: index = {}", i);
+        }
+        sleep(Duration::from_secs(1));
+    }
+    let _ = cli.disconnect(None).wait_for(Duration::from_secs(3));
+    // 断开连接时发送5个消息
+    for i in 0..5 {
+        let content = format!("hello, this is second message , index = {}", i);
+        let msg = mqtt::Message::new(TOPICS[0].to_string(), content, QOS);
+        if let Err(err) = cli.publish(msg).wait_for(Duration::from_secs(1)) {
+            println!("推送数据失败: {:?}, index = {}", err, i);
+        } else {
+            println!("推送数据成功: index = {}", i);
+        }
+        sleep(Duration::from_secs(1));
+    }
+    let _ = cli.reconnect().wait_for(Duration::from_secs(3));
+    // 等待数据发送
     let mut index = 0;
     loop {
-        let content = format!("hello, this is test message , index = {}", index);
-        let msg = mqtt::Message::new(TOPICS[0].to_string(), content, 0);
+        let content = format!("hello, this is second message , index = {}", index);
+        let msg = mqtt::Message::new(TOPICS[0].to_string(), content, QOS);
         if let Err(err) = cli.publish(msg).wait_for(Duration::from_secs(1)) {
             println!("推送数据失败: {:?}, index = {}", err, index);
         } else {
             println!("推送数据成功: index = {}", index);
+        }
+        index += 1;
+        sleep(Duration::from_secs(3));
+    }
+}
+
+// 一直循环发送消息
+fn demo_auto_run() {
+    let create_opts = mqtt::CreateOptionsBuilder::new()
+        .server_uri(BROKER.to_string())
+        .client_id("9".to_string())
+        .send_while_disconnected(true)
+        // .allow_disconnected_send_at_anytime(false)
+        .persistence(mqtt::PersistenceType::FilePath(std::path::PathBuf::from("./message_cache")))
+        .max_buffered_messages(100)
+        .finalize();
+    let cli = mqtt::AsyncClient::new(create_opts).unwrap();
+
+    let conn_opt = mqtt::ConnectOptionsBuilder::new()
+        .keep_alive_interval(Duration::from_secs(20))
+        .clean_session(true)
+        .retry_interval(Duration::from_secs(1))
+        .automatic_reconnect(Duration::from_secs(1), Duration::from_secs(10))
+        .connect_timeout(Duration::from_secs(5))
+        .finalize();
+
+    let _ = cli.connect(conn_opt.clone()).wait_for(Duration::from_secs(3));
+
+    let mut index = 0;
+    loop {
+        let content = format!("hello, this is test message , index = {}", index);
+        let msg = mqtt::Message::new(TOPICS[0].to_string(), content, QOS);
+        if let Err(err) = cli.publish(msg.clone()).wait_for(Duration::from_secs(1)) {
+            println!("推送数据失败: {:?}, index = {}, msg.retained = {}", err, index, msg.retained());
+        } else {
+            println!("推送数据成功: index = {}, msg.retained = {}", index, msg.retained());
         }
         index += 1;
         sleep(Duration::from_secs(1));
