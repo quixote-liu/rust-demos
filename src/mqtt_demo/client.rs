@@ -162,20 +162,20 @@ fn demo1() {
 fn demo_auto_run() {
     let create_opts = mqtt::CreateOptionsBuilder::new()
         .server_uri(BROKER.to_string())
-        .client_id("9".to_string())
+        .client_id("11".to_string())
         .send_while_disconnected(true)
-        // .allow_disconnected_send_at_anytime(false)
+        .allow_disconnected_send_at_anytime(true)
         .persistence(mqtt::PersistenceType::FilePath(std::path::PathBuf::from("./message_cache")))
         .max_buffered_messages(100)
         .finalize();
     let cli = mqtt::AsyncClient::new(create_opts).unwrap();
 
-    let conn_opt = mqtt::ConnectOptionsBuilder::new()
-        .keep_alive_interval(Duration::from_secs(20))
-        .clean_session(true)
-        .retry_interval(Duration::from_secs(1))
-        .automatic_reconnect(Duration::from_secs(1), Duration::from_secs(10))
-        .connect_timeout(Duration::from_secs(5))
+    let conn_opt: mqtt::ConnectOptions = mqtt::ConnectOptionsBuilder::new()
+        .keep_alive_interval(Duration::from_secs(5))
+        .clean_session(false)
+        // .retry_interval(Duration::from_secs(1))
+        .automatic_reconnect(Duration::from_secs(1), Duration::from_secs(5))
+        .connect_timeout(Duration::from_secs(1))
         .finalize();
 
     let _ = cli.connect(conn_opt.clone()).wait_for(Duration::from_secs(3));
