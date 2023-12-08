@@ -16,3 +16,4 @@ pub mod merge;
 mod is_palindrome;
 mod tribonacci;
 mod tictactoe;
+mod count_binary_substrings;
