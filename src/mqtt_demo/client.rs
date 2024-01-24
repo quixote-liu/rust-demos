@@ -5,7 +5,8 @@ use std::thread::sleep;
 
 extern crate paho_mqtt as mqtt;
 
-const BROKER : &str = "tcp://10.10.10.73:1883";
+// const BROKER : &str = "tcp://10.10.10.73:1883";
+const BROKER : &str = "tcp://192.168.31.137:1883";
 const CLIENT : &str = "rust_publish111";
 const TOPICS : &[&str] = &["testtopic/demo"];
 
@@ -164,8 +165,8 @@ fn demo_auto_run() {
     let create_opts = mqtt::CreateOptionsBuilder::new()
         .server_uri(BROKER.to_string())
         .client_id(CLIENT.to_string())
-        .allow_disconnected_send_at_anytime(true)
-        .max_buffered_messages(10)
+        // .allow_disconnected_send_at_anytime(true)
+        // .max_buffered_messages(10)
         .finalize();
     let cli = mqtt::AsyncClient::new(create_opts).unwrap();
 

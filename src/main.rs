@@ -85,7 +85,9 @@ fn main() {
     // let n = 1;
     // cal::merge::Solution::merge(&mut a, m, &mut b, n);
 
-    mqtt_demo::client::demo_run();
+    // mqtt_demo::client::demo_run();
+
+    hello::demo_cal();
 }
 
 fn some_function<T, U>(t: &T, u: &U) -> i32
@@ -120,4 +122,5 @@ fn largest<T: std::cmp::PartialOrd + Copy>(list: &[T]) -> T {
     }
     return max;
 }
+
 

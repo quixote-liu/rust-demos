@@ -15,3 +15,4 @@ mod gcd_of_strings;
 pub mod merge;
 mod is_palindrome;
 mod tribonacci;
+mod search_insert;

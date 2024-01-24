@@ -21,12 +21,10 @@ pub fn demo_test() {
     let a = [2, 3, 4, 5];
     let b = [2, 3, 4, 5,6];
 
-    fn five() -> i32 {
-        5
-    }
-    print!("five() = {}\n", five());
+    let f = || -> i32 {5};
+    print!("five() = {}\n", f());
 
-    let c = if five() > 0 {1} else {0};
+    let c = if f() > 0 {1} else {0};
     print!("c value = {}\n", c);
 
     let mut i = 0;
@@ -38,5 +36,11 @@ pub fn demo_test() {
     for i in a.iter() {
         println!("a = {}", i);
     };
+}
+
+pub fn demo_cal() {
+    let (a, b) = (1, 2);
+    let c = a/b;
+    println!("c={}", c);
 }
 
