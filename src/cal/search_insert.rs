@@ -1,3 +1,5 @@
+// https://leetcode.cn/problems/search-insert-position/
+
 struct Solution{}
 
 impl Solution {
@@ -13,7 +15,7 @@ impl Solution {
             if n == target {
                 return start;
             } else if n > target {
-                return if start-1 >= 0 {start-1} else {0};
+                return start;
             } else {
                 return start + 1;
             }
@@ -26,10 +28,8 @@ impl Solution {
             }
 
             let n = nums[start as usize];
-            if n == target {
+            if n >= target {
                 return start;
-            } else if n > target {
-                return if start-1 >= 0 {start-1} else {0};
             }
 
             let mid = (start + end)/2;
