@@ -1,4 +1,5 @@
-use std::{vec, fmt::{Display, Debug}, collections::btree_map::Values, ops::Add};
+use std::{vec, fmt::{Display, Debug}, collections::btree_map::Values, ops::Add, process::Command, io::Read};
+use encoding::codec::utf_8::from_utf8;
 use inventory::ShirtColor;
 
 use crate::demo::max;
@@ -21,6 +22,8 @@ mod demo_codes;
 mod display_demo;
 mod mqtt_demo;
 mod path_demo;
+mod command_demo;
+use std::fs::File;
 
 fn main() {
     // demo::run();
@@ -86,9 +89,43 @@ fn main() {
     // let n = 1;
     // cal::merge::Solution::merge(&mut a, m, &mut b, n);
 
-    mqtt_demo::client::demo_run();
+    // mqtt_demo::client::demo_run();
 
     // path_demo::path_demo_run();
+
+    // let sound = command_demo::get_fpad7_sound();
+    // println!("sound = {:?}", sound);
+    // command_demo::set_fpad7_volumn(50);
+    // command_demo::set_fpad7_enable(false);
+
+
+    // cal_demo()
+
+    // some_demo();
+
+    some_demo();
+}
+
+fn cal_demo() {
+    let volume:u8 = 40;
+    let ratio = (volume as f64)/100.0;
+    println!("ratio = {}", ratio);
+}
+
+fn some_demo() {
+    if let Ok(mut file) = File::open("/sys/class/misc/vendor_storage/modecode") {
+        let mut model_code = String::new();
+        let _ = file.read_to_string(&mut model_code);
+        println!("model_code = [{}]", model_code);
+    }
+
+    if let Ok(mut file) = File::open("/sys/class/misc/vendor_storage/serialnum") {
+        let mut sn = String::new();
+        let _ = file.read_to_string(&mut sn);
+        println!("serialnum = [{}]", sn);
+    }
+
+    println!("END")
 }
 
 fn some_function<T, U>(t: &T, u: &U) -> i32

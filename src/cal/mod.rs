@@ -17,3 +17,5 @@ mod is_palindrome;
 mod tribonacci;
 mod tictactoe;
 mod count_binary_substrings;
+mod all_cells_dist_order;
+mod decompress_rl_elist;
