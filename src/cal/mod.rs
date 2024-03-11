@@ -18,3 +18,4 @@ mod tribonacci;
 mod search_insert;
 mod tictactoe;
 mod count_binary_substrings;
+mod detect_capital_use;
