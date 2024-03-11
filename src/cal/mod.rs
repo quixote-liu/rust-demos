@@ -19,3 +19,5 @@ mod search_insert;
 mod tictactoe;
 mod count_binary_substrings;
 mod detect_capital_use;
+mod all_cells_dist_order;
+mod decompress_rl_elist;
