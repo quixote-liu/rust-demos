@@ -90,12 +90,6 @@ fn main() {
     // cal::merge::Solution::merge(&mut a, m, &mut b, n);
 
     // mqtt_demo::client::demo_run();
-<<<<<<< HEAD
-
-    hello::demo_cal();
-    mqtt_demo::client::demo_run();
-=======
->>>>>>> a103e8569c243cc83e25ac97d27ff26501334575
 
     // path_demo::path_demo_run();
 
@@ -109,7 +103,11 @@ fn main() {
 
     // some_demo();
 
-    some_demo();
+    // some_demo();
+
+    for i in 10..0 {
+        println!("{i}")
+    }
 }
 
 fn cal_demo() {

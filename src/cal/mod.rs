@@ -21,3 +21,5 @@ mod count_binary_substrings;
 mod detect_capital_use;
 mod all_cells_dist_order;
 mod decompress_rl_elist;
+mod shift_grid;
+mod find_special_integer;
