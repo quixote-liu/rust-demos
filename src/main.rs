@@ -1,8 +1,3 @@
-use std::{vec, fmt::{Display, Debug}, collections::btree_map::Values, ops::Add, process::Command, io::Read};
-use encoding::codec::utf_8::from_utf8;
-use inventory::ShirtColor;
-
-use crate::demo::max;
 mod front_of_host;
 mod demo;
 mod vector;
@@ -23,6 +18,12 @@ mod display_demo;
 mod mqtt_demo;
 mod path_demo;
 mod command_demo;
+mod json_demo;
+
+use std::{vec, fmt::{Display, Debug}, collections::btree_map::Values, ops::Add, process::Command, io::Read};
+use encoding::codec::utf_8::from_utf8;
+use inventory::ShirtColor;
+use crate::demo::max;
 use std::fs::File;
 
 fn main() {

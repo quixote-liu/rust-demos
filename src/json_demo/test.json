@@ -1,0 +1,12 @@
+{
+    "name": "John Doe",
+    "age": 43,
+    "address": {
+        "street": "10 Downing Street",
+        "city": "wuhan"
+    },
+    "phones": [
+        "13233334444",
+        "15122223333"
+    ]
+}
