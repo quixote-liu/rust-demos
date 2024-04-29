@@ -107,3 +107,82 @@ mod test4 {
         struct_op_demo();
     }
 }
+
+struct U {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn u_demo() {
+    let u1 = U{
+        username: String::from("lcs"),
+        email: String::from("sss@email.com"),
+        sign_in_count: 3,
+        active: true,
+    };
+    let u2 = set_email(u1);
+    assert_eq!(u2.email, String::from("eee@email.com"));
+}
+
+fn set_email(mut u: U) -> U {
+    u.email = String::from("eee@email.com");
+    u
+}
+
+#[cfg(test)]
+mod test5 {
+    use super::*;
+
+    #[test]
+    fn test_u_demo() {
+        u_demo();
+    }
+}
+
+fn move_person_struct() {
+    struct Person {
+        name: String,
+        age: u8,
+    }
+    let p = Person{
+        name: String::from("wuhan"),
+        age: 45,
+    };
+    let Person{name, ref age} = p;
+    assert_eq!(name, String::from("wuhan"));
+    assert_eq!(*age, 45);
+    println!("age is {}", age);
+}
+
+#[cfg(test)]
+mod test6 {
+    use super::*;
+
+    #[test]
+    fn test_move_person_struct() {
+        move_person_struct();
+    }
+}
+
+// 修复错误
+#[derive(Debug)]
+struct File {
+    name: String,
+    data: String,
+}
+
+fn file_demo() {
+    let f = File {
+        name: String::from("readme.md"),
+        data: "Rust By Practice".to_string()
+    };
+
+    let _name = f.name;
+
+    // 只能修改这一行
+    println!("{}", f.data);
+}
+
+

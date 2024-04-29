@@ -5,3 +5,4 @@ mod array_demo;
 mod slice_demo;
 mod tuple;
 mod struct_demo;
+mod enum_demo;
