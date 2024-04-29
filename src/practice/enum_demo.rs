@@ -70,7 +70,14 @@ fn enum_demo() {
     let show_msg = |msg: Message| {
         println!("{}", msg);
     };
-    for m in msg {
+    for m in msg.clone()     {
+        show_msg(m);
+    }
+        
+    let msg2 = &msg[..];
+    let mut msg2_vec = msg2.to_vec();
+    msg2_vec.push(Message::ChangeColor(1, 2, 3));
+    for m in msg2_vec {
         show_msg(m);
     }
 }
