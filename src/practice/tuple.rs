@@ -5,18 +5,20 @@ fn tuple_demo() {
     // 填空让代码工作
     let t: (u8, u16, i64, &str, String) = (1u8, 2u16, 3i64, "hello", String::from(", world"));
 
+    let _nn = 8u8;
+
     let t = ("i", "am", "sunface");
     assert_eq!(t.2, "sunface");
 
     // 打印长度超过12的元组
     #[derive(Debug)]
-    struct long_tuple(
+    struct LongTuple(
         i32, i32, i32, i32,
         i32, i32, i32, i32,
         i32, i32, i32, i32,
         i32,
     );
-    let too_long_tuple:long_tuple = long_tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
+    let too_long_tuple = LongTuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
     println!("too long tuple: {:?}", too_long_tuple);
 
     // 使用模式匹配来解构元组
