@@ -20,6 +20,7 @@ mod path_demo;
 mod command_demo;
 mod json_demo;
 mod practice;
+mod practice_control;
 
 use std::{vec, fmt::{Display, Debug}, collections::btree_map::Values, ops::Add, process::Command, io::Read};
 use encoding::codec::utf_8::from_utf8;
