@@ -14,6 +14,10 @@ fn for_demo() {
 
     let numbers = [1, 2, 3];
     // numbers中的元素实现了 Copy，因此无需转移所有权
+    for (k, n) in numbers.iter().enumerate() {
+
+    }
+    
     for n in numbers {
         // do something with name...
     }

@@ -19,6 +19,11 @@ fn array_demo1() {
     // `get` 返回 `Option<T>` 类型，因此它的使用非常安全
     let name0 = names.get(0).unwrap();
     let _name1 = &names[1];
+
+    let mut arr4 = [1; 10];
+    arr4[0] = 2;
+    assert_eq!(arr4[0], 2);
+    
 }
 
 #[cfg(test)]
