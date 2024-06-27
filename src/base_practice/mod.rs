@@ -5,5 +5,6 @@ mod impl_demo;
 mod generics_demo;
 mod const_generics_demo;
 mod traits_demo;
+mod trait_practice;
 
 // https://practice-zh.course.rs/method.html
