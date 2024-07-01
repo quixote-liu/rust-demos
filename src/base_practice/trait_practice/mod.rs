@@ -4,6 +4,9 @@ mod p3;
 mod p4;
 mod p5;
 mod p6;
+mod p7;
+mod p8;
+mod p9;
 
 struct Sheep {naked: bool, name: String}
 
