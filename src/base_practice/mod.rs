@@ -8,5 +8,6 @@ mod traits_demo;
 mod trait_practice;
 mod trait_object;
 mod string_type;
+mod vec_type;
 
 // https://practice-zh.course.rs/method.html
