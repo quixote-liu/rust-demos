@@ -12,5 +12,8 @@ mod vec_type;
 mod hash_map;
 mod as_practice;
 mod from_into_practice;
+mod other_transform;
+mod panic_practice;
+mod return_val;
 
 // https://practice-zh.course.rs/method.html

@@ -30,8 +30,10 @@ impl Bird for Swan {
 
 fn demo() {
     // 填空
-    let duck = Duck{};
+    let duck = Duck;
     duck.swim();
+
+    Duck{}.swim();
 
     let bird = hatch_a_bird(2);
     // 变成鸟儿后，它忘记了如何游，因此以下代码会报错

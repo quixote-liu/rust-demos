@@ -23,3 +23,13 @@ fn demo() {
 
     println!("Success!")
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_demo() {
+        demo()
+    }
+}
