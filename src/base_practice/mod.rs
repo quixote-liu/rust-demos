@@ -15,5 +15,6 @@ mod from_into_practice;
 mod other_transform;
 mod panic_practice;
 mod return_val;
+mod format_demo;
 
 // https://practice-zh.course.rs/method.html
