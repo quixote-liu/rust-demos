@@ -10,7 +10,8 @@ impl <'a> ImportantExcerpt<'a>{
 }
 
 fn demo() {
-    let ie = ImportantExcerpt{part: "hello"};
+    let hello = "hello";
+    let ie = ImportantExcerpt{part: hello};
     let res = ie.level();
     print!("res = {}", res);
 }
