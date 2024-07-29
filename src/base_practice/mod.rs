@@ -18,5 +18,6 @@ mod return_val;
 mod format_demo;
 mod life_demo;
 mod life_static_demo;
+mod life_t_static_demo;
 
 // https://practice-zh.course.rs/method.html
