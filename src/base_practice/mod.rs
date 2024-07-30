@@ -19,5 +19,7 @@ mod format_demo;
 mod life_demo;
 mod life_static_demo;
 mod life_trait_demo;
+mod closure;
+mod iterator_demo;
 
 // https://practice-zh.course.rs/method.html

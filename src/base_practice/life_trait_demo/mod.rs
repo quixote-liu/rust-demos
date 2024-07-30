@@ -1,6 +1,7 @@
 mod p1;
 mod p2;
 mod p3;
+mod p4;
 
 use std::fmt::Debug; // 特征约束使用
 
