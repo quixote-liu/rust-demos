@@ -1,5 +1,3 @@
-
-
 // 练习2
 // `Centimeters`, 一个元组结构体，可以被比较大小
 #[derive(PartialEq, PartialOrd)]

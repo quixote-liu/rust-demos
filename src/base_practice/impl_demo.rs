@@ -5,7 +5,7 @@ struct Point {
 
 impl Point {
     fn origin() -> Self {
-        Point { x: 0.0, y: 0.0 }
+        Point { x: 0.0, y: 0.0 };
     }
 
     fn new(x: f64, y: f64) -> Self {

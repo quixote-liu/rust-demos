@@ -40,6 +40,12 @@ fn demo() {
         // 因此，以下代码会报错
         // bird.fly();
     }
+
+    // let birds_2: Vec<dyn Bird> = vec![
+    //     Box::new(Duck),
+    //     Box::new(Swan)
+    // ];
+    // let bird1: dyn Bird = Duck;
 }
 
 

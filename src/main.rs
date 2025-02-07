@@ -1,7 +1,6 @@
 mod front_of_host;
 mod demo;
 mod vector;
-mod file_demo;
 mod inventory;
 mod iterator;
 mod box_demo;
@@ -21,6 +20,9 @@ mod command_demo;
 mod json_demo;
 mod practice;
 mod base_practice;
+mod file_demo;
+mod xinput_demo;
+mod screen_rotate;
 
 use std::{vec, fmt::{Display, Debug}, collections::btree_map::Values, ops::Add, process::Command, io::Read};
 use encoding::codec::utf_8::from_utf8;
@@ -108,9 +110,13 @@ fn main() {
 
     // some_demo();
 
-    for i in 10..0 {
-        println!("{i}")
-    }
+    // for i in 10..0 {
+    //     println!("{i}")
+    // }
+
+    // command_demo::exe_cmd()
+
+    screen_rotate::output_message()
 }
 
 fn cal_demo() {

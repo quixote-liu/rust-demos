@@ -4,10 +4,10 @@ struct Solution{}
 
 impl Solution {
     pub fn detect_capital_use(word: String) -> bool {
-        let start = "a".as_bytes();
-        let end = "z".as_bytes(); 
+        let start = 'a' as u8;
+        let end = 'z' as u8; 
         let is_up = |code:u8| -> bool {
-            if code >= start[0] && code <= end[0] {
+            if code >= start && code <= end {
                 return false;
             }
             return true;

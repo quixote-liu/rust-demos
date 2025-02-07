@@ -23,6 +23,16 @@ pub fn exe_cmd() {
     //         println!("command error = {:?}", e);
     //     },
     // }
+    restore_sh()
+}
+
+fn restore_sh() {
+    println!("屏幕转角设置完毕，开始重启浏览器");
+    if let Err(e) = Command::new("bash").arg("restore.sh").output() {
+        println!("重启浏览器失败: {:?}", e);
+        return;
+    }
+    println!("屏幕转角设置完毕，完成重启浏览器");
 }
 
 // const FPAD7_SINK_NAME :&str = "alsa_output.platform-cs4344-sound.stereo-fallback"; // 15 arm
