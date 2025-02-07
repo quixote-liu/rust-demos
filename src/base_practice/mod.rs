@@ -7,5 +7,19 @@ mod const_generics_demo;
 mod traits_demo;
 mod trait_practice;
 mod trait_object;
+mod string_type;
+mod vec_type;
+mod hash_map;
+mod as_practice;
+mod from_into_practice;
+mod other_transform;
+mod panic_practice;
+mod return_val;
+mod format_demo;
+mod life_demo;
+mod life_static_demo;
+mod life_trait_demo;
+mod closure;
+mod iterator_demo;
 
 // https://practice-zh.course.rs/method.html

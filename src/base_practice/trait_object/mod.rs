@@ -5,3 +5,4 @@ mod static_trait;
 mod trait_safe;
 mod relate_type;
 mod fully_qualified_syntax;
+mod supertraits;
