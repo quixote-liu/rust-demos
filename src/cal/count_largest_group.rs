@@ -39,6 +39,42 @@ struct Solution;
 
 impl Solution {
     pub fn count_largest_group(n: i32) -> i32 {
-        n
+        let count = |mut num: i32| -> i32 {
+            let mut res = 0;
+            loop {
+                if num > 10 {
+                    res += num % 10;
+                    num = num / 10;
+                } else {
+                    res += num;
+                    break res;
+                }
+            }
+        };
+
+        use std::collections::HashMap;
+        let mut group_map: HashMap<i32, Vec<i32>> = HashMap::new();
+        for i in 1..n+1 {
+            let mut c = 0;
+            if i < 10 {
+                c = i;
+            } else {
+                c = count(i);
+            }
+            if let Some(v) = group_map.get_mut(&c) {
+                v.push(i);
+            } else {
+                group_map.insert(c, Vec::from([i]));
+            }
+        }
+
+        let mut res = 0;
+        group_map.iter().for_each(|e| {
+            if e.1.len() > res {
+                res = e.1.len();
+            }
+        });
+
+        res as i32
     }
 }
