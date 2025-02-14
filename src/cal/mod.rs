@@ -32,3 +32,8 @@ mod find_the_distance_value;
 mod dest_city;
 mod diagonal_sum;
 mod get_maximum_generated;
+mod reformat_number;
+mod array_rank_transform;
+mod count_students;
+mod check_if_exist;
+mod count_largest_group;

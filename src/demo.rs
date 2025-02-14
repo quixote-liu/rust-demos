@@ -1,4 +1,22 @@
 pub fn run() {
+    demo2()
+}
+
+fn demo2() {
+    fn main() {
+        let mut s = String::from("Hello");
+        append_world(&mut s); // 可变借用
+        println!("{}", s); // 输出 "Hello world"
+    }
+    
+    fn append_world(s: &mut String) {
+        s.push_str(" world");
+    }
+
+    main()
+}
+
+fn demo1() {
     let mut u = user { active: true, username: String::from("lcs"), email: String::from("lcs@email.com"), sign_in_count: 32 };
 
     println!("the user email is = {}", u.email);

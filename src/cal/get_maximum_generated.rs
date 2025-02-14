@@ -47,14 +47,18 @@ struct Solution;
 
 impl Solution {
     pub fn get_maximum_generated(n: i32) -> i32 {
+        if n == 0 {
+            return 0;
+        }
         let mut nums = Vec::from([0, 1]);
-        nums.resize_with((n+1) as usize, Default::default());
+        nums.resize((n+1) as usize, 0);
         let mut maxnum = 1;
-        for i in 0..n-1 {
+        for i in 0..(n+1)/2 {
             let ii = 2*i;
             if 2 <= ii && ii <= n {
                 nums[ii as usize] = nums[i as usize];
-            } else if 2 <= ii +1 && ii+1 <= n {
+            }
+            if 2 <= ii+1 && ii+1 <= n {
                 let val = nums[i as usize] + nums[(i+1) as usize];
                 nums[(ii+1) as usize] = val;
                 if val > maxnum {

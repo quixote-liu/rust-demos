@@ -23,6 +23,8 @@ mod base_practice;
 mod file_demo;
 mod xinput_demo;
 mod screen_rotate;
+mod arc_demo;
+mod arc_mutex_demo;
 
 use std::{vec, fmt::{Display, Debug}, collections::btree_map::Values, ops::Add, process::Command, io::Read};
 use encoding::codec::utf_8::from_utf8;
@@ -32,6 +34,10 @@ use std::fs::File;
 
 fn main() {
     // demo::run();
+
+    // arc_demo::arc_demo();
+    arc_mutex_demo::run();
+
     // vector::for_range();
 
     // vector::for_enum();
@@ -116,7 +122,7 @@ fn main() {
 
     // command_demo::exe_cmd()
 
-    screen_rotate::output_message()
+    // screen_rotate::output_message()
 }
 
 fn cal_demo() {
