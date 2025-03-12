@@ -42,7 +42,7 @@ impl Solution {
         let count = |mut num: i32| -> i32 {
             let mut res = 0;
             loop {
-                if num > 10 {
+                if num >= 10 {
                     res += num % 10;
                     num = num / 10;
                 } else {
@@ -54,6 +54,7 @@ impl Solution {
 
         use std::collections::HashMap;
         let mut group_map: HashMap<i32, Vec<i32>> = HashMap::new();
+        let mut max_group_len = 0;
         for i in 1..n+1 {
             let mut c = 0;
             if i < 10 {
@@ -61,17 +62,23 @@ impl Solution {
             } else {
                 c = count(i);
             }
+            let group_len: usize;
             if let Some(v) = group_map.get_mut(&c) {
                 v.push(i);
+                group_len = v.len();
             } else {
                 group_map.insert(c, Vec::from([i]));
+                group_len = 1;
+            }
+            if max_group_len < group_len {
+                max_group_len = group_len;
             }
         }
 
         let mut res = 0;
         group_map.iter().for_each(|e| {
-            if e.1.len() > res {
-                res = e.1.len();
+            if e.1.len() == max_group_len {
+                res += 1;
             }
         });
 

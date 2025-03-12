@@ -25,6 +25,7 @@ mod xinput_demo;
 mod screen_rotate;
 mod arc_demo;
 mod arc_mutex_demo;
+mod once_init;
 
 use std::{vec, fmt::{Display, Debug}, collections::btree_map::Values, ops::Add, process::Command, io::Read};
 use encoding::codec::utf_8::from_utf8;
