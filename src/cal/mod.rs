@@ -45,4 +45,6 @@ mod running_sum;
 mod thousand_separator;
 mod lru_cache;
 mod rotate_right;
-mod detectCycle;
+mod remove_nth_from_end;
+mod is_valid_sudoku;
+mod split_list_to_parts;
