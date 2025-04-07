@@ -31,57 +31,35 @@ impl Solution {
             leng += 1;
             cur = &node.next;
         }
-        let mut parts_len: Vec<i32> = vec![0;k as usize];
+        let mut part_lens: Vec<i32> = vec![0;k as usize];
         let mut index = 0;
         for _ in 0..leng {
-            parts_len[index] += 1;
+            part_lens[index] += 1;
             index += 1;
-            if index == parts_len.len() {
+            if index == part_lens.len() {
                 index = 0;
             }
         }
         let mut res : Vec<Option<Box<ListNode>>> = vec![];
         let mut head = head;
-        for part_len in parts_len {
+        for part_len in part_lens {
             if part_len == 0 {
                 res.push(None);
+                continue;
             }
             let mut cur = head.as_mut().unwrap();
             let mut len = part_len;
             while let Some(node) = cur.next.as_mut() {
                 len -= 1;
+                cur = node;
                 if len == 0 {
-                    
+                    res.push(head);
+                    head = cur.next.take();
+                    break;
                 }
-                
             }
-            let mut tail = head.take();
-            
+
         }
-        
-
-        
-
-        // 长度大于链表长度时，返回单个node + Null
-        if k >= leng {
-            let mut index = k;
-            let mut res: Vec<Option<Box<ListNode>>> = vec![];
-            let mut next: Option<Box<ListNode>> = head;
-            while let Some(mut node) = next.take() {
-                next = node.next;
-                node.next = None;
-                res.push(Some(node));
-                index -= 1;
-            }
-            for _ in 0..index {
-                res.push(None);
-            }
-            return res;
-        }
-        // 长度小于链表长度
-
-
-
         vec![]
     }
 }
