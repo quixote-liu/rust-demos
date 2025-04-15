@@ -71,7 +71,7 @@ impl Solution {
             // 满二叉树，节点数为2^h - 1
             (1 << left_height) - 1
         } else {
-            1 + count_nodes(root.borrow().left.clone()) + count_nodes(root.borrow().right.clone())
+            1 + Self::count_nodes_v2(root.borrow().left.clone()) + Self::count_nodes_v2(root.borrow().right.clone())
         }
     }
 }
