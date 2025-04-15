@@ -48,3 +48,4 @@ mod rotate_right;
 mod remove_nth_from_end;
 mod is_valid_sudoku;
 mod split_list_to_parts;
+mod count_nodes;
