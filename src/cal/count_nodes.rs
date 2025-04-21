@@ -35,43 +35,43 @@ impl Solution {
         }
     }
 
-    pub fn count_nodes_v2(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        if root.is_none() {
-            return 0;
-        }
+    // pub fn count_nodes_v2(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    //     if root.is_none() {
+    //         return 0;
+    //     }
         
-        let root = root.unwrap();
-        let left_height = {
-            let mut height = 0;
-            let mut node = root.clone();
-            loop {
-                height += 1;
-                if node.borrow().left.is_none() {
-                    break;
-                }
-                node = node.borrow().left.clone().unwrap();
-            }
-            height
-        };
+    //     let root = root.unwrap();
+    //     let left_height = {
+    //         let mut height = 0;
+    //         let mut node = root.clone();
+    //         loop {
+    //             height += 1;
+    //             if node.borrow().left.is_none() {
+    //                 break;
+    //             }
+    //             node = node.borrow().left.clone().unwrap();
+    //         }
+    //         height
+    //     };
         
-        let right_height = {
-            let mut height = 0;
-            let mut node = root.clone();
-            loop {
-                height += 1;
-                if node.borrow().right.is_none() {
-                    break;
-                }
-                node = node.borrow().right.clone().unwrap();
-            }
-            height
-        };
+    //     let right_height = {
+    //         let mut height = 0;
+    //         let mut node = root.clone();
+    //         loop {
+    //             height += 1;
+    //             if node.borrow().right.is_none() {
+    //                 break;
+    //             }
+    //             node = node.borrow().right.clone().unwrap();
+    //         }
+    //         height
+    //     };
         
-        if left_height == right_height {
-            // 满二叉树，节点数为2^h - 1
-            (1 << left_height) - 1
-        } else {
-            1 + Self::count_nodes_v2(root.borrow().left.clone()) + Self::count_nodes_v2(root.borrow().right.clone())
-        }
-    }
+    //     if left_height == right_height {
+    //         // 满二叉树，节点数为2^h - 1
+    //         (1 << left_height) - 1
+    //     } else {
+    //         1 + Self::count_nodes_v2(root.borrow().left.clone()) + Self::count_nodes_v2(root.borrow().right.clone())
+    //     }
+    // }
 }
