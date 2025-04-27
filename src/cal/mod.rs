@@ -50,3 +50,6 @@ mod is_valid_sudoku;
 mod split_list_to_parts;
 mod count_nodes;
 mod freq_alphabets;
+mod three_consecutive_odds;
+mod modify_string;
+mod find_lucky;
