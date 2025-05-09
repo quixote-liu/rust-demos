@@ -53,3 +53,4 @@ mod freq_alphabets;
 mod three_consecutive_odds;
 mod modify_string;
 mod find_lucky;
+mod find_kth_positive;
