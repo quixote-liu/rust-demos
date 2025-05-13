@@ -55,3 +55,4 @@ mod modify_string;
 mod find_lucky;
 mod k_length_apart;
 mod string_matching;
+mod find_kth_positive;
