@@ -1,2 +1,2 @@
 mod demo;
-mod stream;
+pub mod stream;

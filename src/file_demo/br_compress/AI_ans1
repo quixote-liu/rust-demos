@@ -1,0 +1,139 @@
+use actix_files::NamedFile;
+use actix_web::{get, App, HttpResponse, HttpServer, Responder};
+use bytes::Bytes;
+use std::fs::File;
+use std::io::{self, BufReader, Read};
+use std::path::PathBuf;
+// use tokio::task::block_in_place;
+
+const CHUNK_SIZE: usize = 4 * 1024 * 1024; // 4MB
+
+#[get("/stream-file/{filename}")]
+pub async fn stream_file(path: actix_web::web::Path<String>) -> impl Responder {
+    let filename = path.into_inner();
+    let file_path = PathBuf::from(filename);
+
+    // 检查文件是否存在
+    if !file_path.exists() {
+        return HttpResponse::NotFound().body("File not found");
+    }
+
+    // 构建响应流
+    HttpResponse::Ok()
+        .content_type("application/json")
+        .streaming(FileStream::new(file_path))
+}
+
+struct FileStream {
+    reader: Option<BufReader<File>>,
+    file_path: PathBuf,
+}
+
+impl FileStream {
+    fn new(file_path: PathBuf) -> Self {
+        Self {
+            reader: None,
+            file_path,
+        }
+    }
+}
+
+impl futures::Stream for FileStream {
+    type Item = io::Result<Bytes>;
+
+    fn poll_next(mut self: std::pin::Pin<&mut Self>, _cx: &mut std::task::Context<'_>) -> std::task::Poll<Option<Self::Item>> {
+        // 首次调用时打开文件
+        let reader = match &mut self.reader {
+            Some(reader) => reader,
+            None => {
+                let file = match File::open(&self.file_path) {
+                    Ok(file) => file,
+                    Err(e) => return std::task::Poll::Ready(Some(Err(e))),
+                };
+                let reader = BufReader::new(file);
+                self.reader = Some(reader);
+                self.reader.as_mut().unwrap()
+            }
+        };
+
+        // 读取4MB块
+        let mut buffer = vec![0; CHUNK_SIZE];
+        match reader.read(&mut buffer) {
+            Ok(0) => std::task::Poll::Ready(None), // 读取完毕
+            Ok(n) => {
+                buffer.truncate(n);
+                std::task::Poll::Ready(Some(Ok(Bytes::from(buffer))))
+            }
+            Err(e) => std::task::Poll::Ready(Some(Err(e))),
+        }
+
+        // 使用block_in_place执行可能阻塞的IO操作
+        // std::task::Poll::Ready(
+            // block_in_place(|| {
+            //     // 首次调用时打开文件
+            //     let reader = match &mut self.reader {
+            //         Some(reader) => reader,
+            //         None => {
+            //             let file = match File::open(&self.file_path) {
+            //                 Ok(file) => file,
+            //                 Err(e) => return Some(Err(e)),
+            //             };
+            //             let reader = BufReader::new(file);
+            //             self.reader = Some(reader);
+            //             self.reader.as_mut().unwrap()
+            //         }
+            //     };
+
+            //     // 读取4MB块
+            //     let mut buffer = vec![0; CHUNK_SIZE];
+            //     match reader.read(&mut buffer) {
+            //         Ok(0) => None, // 读取完毕
+            //         Ok(n) => {
+            //             buffer.truncate(n);
+            //             Some(Ok(Bytes::from(buffer)))
+            //         }
+            //         Err(e) => Some(Err(e)),
+            //     }
+            // })
+            
+        // )
+    }
+}
+
+async fn foo() -> u8 { 
+    88
+}
+
+#[get("/test")]
+pub async fn anync_test() -> impl Responder {
+    println!("开始执行1");
+    async {
+        let x: u8 = foo().await;
+        println!("xx = {}", x);
+
+        println!("开始读取文件");
+        // 开始读取文件，进入IO阻塞
+        let file = File::open("C:\\code\\rust-demos\\src\\file_demo\\br_compress\\AI_ans1");
+        if let Ok(mut f) = file {
+            let mut s = String::new();
+            let _ = f.read_to_string(&mut s).unwrap();
+            println!("{s}");
+        }
+        println!("读取文件完毕");
+    }.await;
+    println!("开始执行2");
+    
+    HttpResponse::Ok()
+}
+
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| {
+        App::new()
+            .service(stream_file)
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
+}  

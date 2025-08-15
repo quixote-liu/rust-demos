@@ -26,6 +26,8 @@ mod screen_rotate;
 mod arc_demo;
 mod arc_mutex_demo;
 mod once_init;
+use actix_web::{App, HttpServer};
+use file_demo::br_compress;
 
 use std::{vec, fmt::{Display, Debug}, collections::btree_map::Values, ops::Add, process::Command, io::Read};
 use encoding::codec::utf_8::from_utf8;
@@ -33,11 +35,11 @@ use inventory::ShirtColor;
 use crate::demo::max;
 use std::fs::File;
 
-fn main() {
+// fn main() {
     // demo::run();
 
     // arc_demo::arc_demo();
-    arc_mutex_demo::run();
+    // arc_mutex_demo::run();
 
     // vector::for_range();
 
@@ -124,7 +126,19 @@ fn main() {
     // command_demo::exe_cmd()
 
     // screen_rotate::output_message()
-}
+// }
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| {
+        App::new()
+            .service(br_compress::stream::stream_file)
+            .service(br_compress::stream::anync_test)
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
+}  
 
 fn cal_demo() {
     let volume:u8 = 40;
