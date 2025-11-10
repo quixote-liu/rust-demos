@@ -59,3 +59,5 @@ mod find_kth_positive;
 mod num_special;
 mod is_valid_bracket;
 mod busy_student;
+mod merge_alternately_1768;
+mod subtract_product_and_sum_1281;
