@@ -61,3 +61,5 @@ mod is_valid_bracket;
 mod busy_student;
 mod merge_alternately_1768;
 mod subtract_product_and_sum_1281;
+mod remove_palindrome_sub_1332;
+mod is_happy_202;
